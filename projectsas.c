@@ -168,3 +168,143 @@ void afficher_meilleurs_etudiants() {
     }
 
 }
+  int etudiants_reussi() {
+    int cpt=0;
+    for (int i = 0; i < total; i++) {
+        if (etudiants[i].note_generale >=10) {
+            cpt ++;
+        }
+    }
+    return cpt;
+}
+void nombre_etudiants_reussi() {
+    int math = 0, pc = 0, info = 0, svt = 0, gec = 0;
+
+    for (int i = 0; i < total; i++) {
+         if (etudiants[i].note_generale >=10){  
+           if (strcmp(etudiants[i].departement, "Math") == 0) {
+              math++;
+              } else if (strcmp(etudiants[i].departement, "PC") == 0) {
+              pc++;
+              } else if (strcmp(etudiants[i].departement, "Info") == 0) {
+
+              info++;
+              } else if (strcmp(etudiants[i].departement, "SVT") == 0) {
+              svt++;
+              } else if (strcmp(etudiants[i].departement, "GEC") == 0) {
+              gec++;
+         }
+        }
+    }
+
+    printf("Nombre d'étudiants reussi dans chaque département:\n");
+    printf("Math: %d\n", math);
+    printf("PC: %d\n", pc);
+    printf("Info: %d\n", info);
+    printf("SVT: %d\n", svt);
+    printf("GEC: %d\n", gec);
+}
+
+void rechercher_etudiant(char nom[50]) {
+    printf("Recherche des etudiants avec le nom %s:\n", nom);
+    for (int i = 0; i < total; i++) {
+        if (strcmp(etudiants[i].nom, nom) == 0) {
+            printf("Numero: %s, Prenom: %s, Departement: %s, Note generale: %.2f\n", etudiants[i].numero, etudiants[i].prenom, etudiants[i].departement, etudiants[i].note_generale);
+        }
+    }
+}
+
+void rechercher_etudiants_par_departement(char departement[50]) {
+    printf("Liste des etudiants dans le departement %s:\n", departement);
+    for (int i = 0; i < total; i++) {
+        if (strcmp(etudiants[i].departement, departement) == 0) {
+            printf("Numero: %s, Nom: %s, Prenom: %s, Note generale: %.2f\n", etudiants[i].numero, etudiants[i].nom, etudiants[i].prenom, etudiants[i].note_generale);
+        }
+    }
+}
+void trierAlphabétique() {
+    int choix;
+    Etudiant temp;
+
+    printf("\n--- Choisissez une option de tri ---\n");
+    printf("1. Trier de A à Z\n");
+    printf("2. Trier de Z à A\n");
+    printf("Entrez votre choix : ");
+    scanf("%d", &choix);
+
+    switch (choix) {
+        case 1:
+            for (int i = 0; i < total - 1; i++) {
+                for (int j = i + 1; j < total; j++) {
+                    if (strcmp(etudiants[i].nom, etudiants[j].nom) > 0) {
+                        temp = etudiants[i];
+                        etudiants[i] = etudiants[j];
+                        etudiants[j] = temp;
+                    }
+                }
+            }
+            printf(" etudiants triés de A à Z.\n");
+            break;
+
+        case 2:
+            for (int i = 0; i < total - 1; i++) {
+                for (int j = i + 1; j < total; j++) {
+                    if (strcmp(etudiants[i].nom, etudiants[j].nom) < 0) {
+                        temp = etudiants[i];
+                        etudiants[i] = etudiants[j];
+                        etudiants[j] = temp;
+                    }
+                }
+            }
+            printf("etudiants triés de Z à A.\n");
+            break;
+
+        default:
+            printf("Choix invalide.\n");
+            return;
+    }
+}
+ 
+void trie_moyen_general() {
+    int choix;
+    Etudiant temp;
+
+    printf("\n--- Choisissez une option de tri ---\n");
+    printf("1. Trie croissante\n");
+    printf("2. Trie decroissante\n");
+    printf("Entrez votre choix : ");
+    scanf("%d", &choix);
+
+    switch (choix) {
+        case 1:
+            for (int i = 0; i < total - 1; i++) {
+                for (int j = i + 1; j < total; j++) {
+                    if (etudiants[i].note_generale<etudiants[j].note_generale ) {
+                        temp = etudiants[i];
+                        etudiants[i] = etudiants[j];
+                        etudiants[j] = temp;
+                    }
+                }
+            }
+            printf(" etudiants triés .\n");
+            break;
+
+        case 2:
+            for (int i = 0; i < total - 1; i++) {
+                for (int j = i + 1; j < total; j++) {
+                    if (etudiants[i].note_generale>etudiants[j].note_generale ) {
+                        temp = etudiants[i];
+                        etudiants[i] = etudiants[j];
+                        etudiants[j] = temp;
+                    }
+                }
+            }
+            printf("etudiants triés.\n");
+            break;
+
+        default:
+            printf("Choix invalide.\n");
+            return;
+    }
+}
+ 
